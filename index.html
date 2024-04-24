@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Localização Atual</title>
+    <style>
+        #ar-text {
+            width: 300px; /* Definir a largura desejada */
+        }
+    </style>
 </head>
 <body>
     <h1>Localização Atual</h1>
 
     <!-- Elemento de texto para exibir a posição atual -->
-    <input type="text" id="ar-text" value="AR Content at Lat: , Long: " readonly size="50">
+    <input type="text" id="ar-text" value="AR Content at Lat: , Long: " readonly>
 
     <!-- Elemento para exibir conteúdo AR na posição atual -->
     <a-scene embedded arjs>
