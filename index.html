@@ -8,6 +8,7 @@
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
+
     <a-scene embedded arjs="sourceType: webcam;">
         <!-- Define your marker -->
         <a-marker preset="hiro">
@@ -16,13 +17,42 @@
         </a-marker>
 
         <!-- Define your GPS entity -->
-        <a-entity gps-entity-place="latitude: -18.916026459440367; longitude: -48.296188273895496;">
+        <a-entity id="gps-entity" gps-entity-place>
             <!-- Your GPS-based AR content goes here -->
-            <a-text value="AR Content at Lat: -18.916, Long: -48.296" color="black" position="0 1.5 0"></a-text>
+            <a-text id="ar-text" color="black" position="0 1.5 0"></a-text>
         </a-entity>
 
         <!-- Define your camera -->
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        // Função para obter a localização atual do dispositivo
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Função para mostrar a posição atual
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Atualizar a posição do elemento de texto
+            var arText = document.getElementById("ar-text");
+            arText.setAttribute("value", "AR Content at Lat: " + latitude + ", Long: " + longitude);
+
+            // Atualizar a posição do elemento de GPS
+            var gpsEntity = document.getElementById("gps-entity");
+            gpsEntity.setAttribute("gps-entity-place", "latitude: " + latitude + "; longitude: " + longitude);
+        }
+
+        // Chamar a função para obter a localização atual
+        getLocation();
+    </script>
+
 </body>
 </html>
