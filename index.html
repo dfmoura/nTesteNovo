@@ -25,7 +25,7 @@
     </a-scene>
 
     <!-- iframe para exibir o mapa do Google -->
-    <iframe id="google-map-iframe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <iframe id="map-iframe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
     <script>
         // Função para obter a localização atual do dispositivo
@@ -50,9 +50,9 @@
             var gpsEntity = document.getElementById("gps-entity");
             gpsEntity.setAttribute("gps-entity-place", "latitude: " + latitude + "; longitude: " + longitude);
 
-            // Atualizar a URL do iframe do Google Maps
-            var googleMapIframe = document.getElementById("google-map-iframe");
-            googleMapIframe.src = "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1588581.672848483!2d" + longitude + "!3d" + latitude + "!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1611195616607!5m2!1sen!2sus";
+            // Atualizar o src do iframe do Google Maps
+            var mapIframe = document.getElementById("map-iframe");
+            mapIframe.src = "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1588581.672848483!2d" + longitude + "!3d" + latitude + "!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1611195616607!5m2!1sen!2sus";
         }
 
         // Chamar a função para obter a localização atual
