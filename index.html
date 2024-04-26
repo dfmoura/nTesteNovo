@@ -24,8 +24,8 @@
         <a-entity camera></a-entity>
     </a-scene>
 
-    <!-- Adicionar DataFrame com o link do Google Maps -->
-    <div id="map-link"></div>
+    <!-- Adicionar o iframe -->
+    <iframe src="map_link.html" width="100%" height="300"></iframe>
 
     <script>
         // Função para obter a localização atual do dispositivo
@@ -49,14 +49,6 @@
             // Atualizar a posição do elemento de GPS
             var gpsEntity = document.getElementById("gps-entity");
             gpsEntity.setAttribute("gps-entity-place", "latitude: " + latitude + "; longitude: " + longitude);
-
-            // Criar o link do Google Maps
-            var mapLinkDiv = document.getElementById("map-link");
-            var googleMapsLink = "https://www.google.com/maps?q=" + latitude + "," + longitude;
-            var mapLinkHTML = "<p><a href='" + googleMapsLink + "' target='_blank'>Ver no Google Maps</a></p>";
-
-            // Adicionar o link ao HTML
-            mapLinkDiv.innerHTML = mapLinkHTML;
         }
 
         // Chamar a função para obter a localização atual
