@@ -8,10 +8,9 @@
         #ar-text {
             width: 300px; /* Definir a largura desejada */
         }
-        #map {
+        #map-container {
             width: 100%;
-            height: 400px;
-            border: 0;
+            height: 400px; /* Altura desejada do mapa */
         }
     </style>
 </head>
@@ -21,9 +20,6 @@
     <!-- Elemento de texto para exibir a posição atual -->
     <input type="text" id="ar-text" value="AR Content at Lat: , Long: " readonly>
 
-    <!-- Elemento para exibir o mapa do Google -->
-    <iframe id="map" src="" frameborder="0" allowfullscreen></iframe>
-
     <!-- Elemento para exibir conteúdo AR na posição atual -->
     <a-scene embedded arjs>
         <a-marker preset="hiro">
@@ -31,6 +27,9 @@
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
+
+    <!-- Mapa do Google -->
+    <div id="map-container"></div>
 
     <script>
         // Função para obter a localização atual do dispositivo
@@ -55,10 +54,16 @@
             var gpsEntity = document.getElementById("gps-entity");
             gpsEntity.setAttribute("gps-entity-place", "latitude: " + latitude + "; longitude: " + longitude);
 
-            // Atualizar o src do iframe com o mapa do Google
-            var mapIframe = document.getElementById("map");
-            mapIframe.src = "https://www.google.com/maps/embed/v1/view?key=YOUR_API_KEY&center=" + latitude + "," + longitude + "&zoom=15";
-            // Substitua 'YOUR_API_KEY' pela sua própria chave de API do Google Maps
+            // Adicionar o mapa do Google
+            var mapContainer = document.getElementById("map-container");
+            var mapUrl = "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d22411.83355190323!2d" + longitude + "!3d" + latitude + "!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1620241471299!5m2!1sen!2sus";
+            var iframe = document.createElement("iframe");
+            iframe.setAttribute("src", mapUrl);
+            iframe.setAttribute("width", "100%");
+            iframe.setAttribute("height", "100%");
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("style", "border:0;");
+            mapContainer.appendChild(iframe);
         }
 
         // Chamar a função para obter a localização atual
