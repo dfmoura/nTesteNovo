@@ -24,8 +24,6 @@
         <a-entity camera></a-entity>
     </a-scene>
 
-    <div id="map"></div> <!-- Adicione um div para conter o mapa -->
-
     <script>
         // Função para obter a localização atual do dispositivo
         function getLocation() {
@@ -48,10 +46,6 @@
             // Atualizar a posição do elemento de GPS
             var gpsEntity = document.getElementById("gps-entity");
             gpsEntity.setAttribute("gps-entity-place", "latitude: " + latitude + "; longitude: " + longitude);
-
-            // Adicionar o iframe do Google Maps
-            var mapDiv = document.getElementById("map");
-            mapDiv.innerHTML = '<iframe src="https://www.google.com/maps/embed/v1/view?key=YOUR_API_KEY&center=' + latitude + ',' + longitude + '&zoom=15" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>';
         }
 
         // Chamar a função para obter a localização atual
