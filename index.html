@@ -57,6 +57,42 @@
 
             // Adicionar o link ao HTML
             mapLinkDiv.innerHTML = mapLinkHTML;
+
+            // Obter informações de localização adicionais usando Geocoding reverso
+            fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=SUA_CHAVE_DE_API_DO_GOOGLE_MAPS')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'OK') {
+                        // Extrair informações de endereço
+                        var addressComponents = data.results[0].address_components;
+                        var country, state, city, neighborhood, street;
+
+                        // Iterar pelos componentes de endereço
+                        addressComponents.forEach(component => {
+                            if (component.types.includes('country')) {
+                                country = component.long_name;
+                            } else if (component.types.includes('administrative_area_level_1')) {
+                                state = component.long_name;
+                            } else if (component.types.includes('locality')) {
+                                city = component.long_name;
+                            } else if (component.types.includes('neighborhood')) {
+                                neighborhood = component.long_name;
+                            } else if (component.types.includes('route')) {
+                                street = component.long_name;
+                            }
+                        });
+
+                        // Exibir informações de localização adicionais
+                        console.log('Country:', country);
+                        console.log('State:', state);
+                        console.log('City:', city);
+                        console.log('Neighborhood:', neighborhood);
+                        console.log('Street:', street);
+                    } else {
+                        console.error('Geocoding request failed with status:', data.status);
+                    }
+                })
+                .catch(error => console.error('Error fetching geocoding data:', error));
         }
 
         // Chamar a função para obter a localização atual
